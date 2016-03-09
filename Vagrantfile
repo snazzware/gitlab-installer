@@ -8,7 +8,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.define :gitlab do |config|
     # Configure some hostname here
-    config.vm.hostname = "gitlab.invalid"
+    config.vm.hostname = "gitlab.local"
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_host = true
     config.vm.box = "ubuntu/trusty64"
     config.vm.provision :shell, :path => "install-gitlab.sh"
 
@@ -16,7 +18,12 @@ Vagrant.configure("2") do |config|
     # We need to use higher ports, and have port forward or nginx proxy
     # or access the site via hostname:<port>, in this case 127.0.0.1:8080
     # By default, Gitlab is at https + port 8443
-    config.vm.network :forwarded_port, guest: 443, host: 8443
+    # config.vm.network :forwarded_port, guest: 443, host: 8443
+
+    # Create a private network, which allows host-only access to the machine
+    # using a specific IP.
+    config.vm.network "private_network", ip: "192.168.201.100"
+
   end
 
   # GitLab recommended specs
