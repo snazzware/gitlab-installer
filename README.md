@@ -15,8 +15,6 @@ Gitlab CI
 
 To set up a runner, you'll need to first set up a project in gitlab. Then, go to that project's settings, click Runners, and under "Specific Runners" find the registration token.
 
-![alt tag](https://www.dropbox.com/s/4yeu5rz8jyhs4ie/Screenshot%202016-03-14%2019.17.34.png?dl=0)
-
 1. Edit project settings and put Lines:\s+(\d+.\d+\%) under Test Coverage Parsing
 2. "vagrant ssh" from command line in the directory you cloned this repo to
 3. Find the CI token of the project that you want to add a runner for, and paste it in to the command line below instead of "CI_TOKEN_GOES_HERE":
