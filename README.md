@@ -40,6 +40,14 @@ phpunit:
 
 I have a simple project set up w/ phpunit tests and gitlab-ci.yml file at https://github.com/snazzware/gitlab-ci-test
 
+Project Settings: Runners
+-------------------------
+![ScreenShot](/screenshots/Screenshot%202016-03-14%2019.42.32.png)
+
+Project Build List
+------------------
+![ScreenShot](/screenshots/Screenshot%202016-03-14%2019.45.35.png)
+
 Original README.md below
 ========================
 
