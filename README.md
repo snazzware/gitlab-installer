@@ -1,6 +1,48 @@
 gitlab-installer
 ================
 
+I've tweaked this from the original upstream to use http by default (to avoid self-signed cert issues w/ CI runner), and to use a private network IP rather than a port number on localhost. This version also installs Docker.
+
+1. Install Vagrant & VirtualBox if you don't already have them
+2. Run "vagrant up" from command line in directory you cloned this repo to
+3. Have some coffee
+4. Vagrant will ask want you to enter your password so that it can edit your /etc/hosts file. If you don't want to enter it, you can manually add "192.168.201.100 gitlab.local".
+5. Open browser to http://gitlab.local
+6. Log in as root / 5iveL!fe
+
+Gitlab CI
+=========
+
+To set up a runner, you'll need to first set up a project in gitlab. Then, go to that project's settings, click Runners, and under "Specific Runners" find the registration token.
+
+![alt tag](https://www.dropbox.com/s/4yeu5rz8jyhs4ie/Screenshot%202016-03-14%2019.17.34.png?dl=0)
+
+1. Edit project settings and put Lines:\s+(\d+.\d+\%) under Test Coverage Parsing
+2. "vagrant ssh" from command line in the directory you cloned this repo to
+3. Find the CI token of the project that you want to add a runner for, and paste it in to the command line below instead of "CI_TOKEN_GOES_HERE":
+```
+# docker run --add-host gitlab.local:192.168.201.100 -e CI_SERVER_URL=http://gitlab.local/ci -e REGISTRATION_TOKEN=CI_TOKEN_GOES_HERE -e GITLAB_SERVER_FQDN=gitlab.local bobey/docker-gitlab-ci-runner-php5.6
+```
+
+Once running, whenever you commit code to the project, a build will automatically kick off and run any tests defined in the .gitlab-ci.yml file of your project.
+
+An example .gitlab-ci.yml file which runs phpunit against a folder called "tests":
+
+```
+.gitlab-ci.yml
+before_script:
+    - /usr/local/bin/composer self-update
+    - composer install
+
+phpunit:
+  script:
+    - vendor/bin/phpunit --coverage-text tests
+```
+
+
+Original README.md below
+========================
+
 Easy Gitlab installer, targeting Ubuntu 14.04 LTS, on Vagrant or on metal.
 
 Supported Vagrant providers:
@@ -18,7 +60,7 @@ For complete template, please see https://gitlab.com/gitlab-org/omnibus-gitlab/b
 In VM, Gitlab is available at https://127.0.0.1:8443/
 In server install, Gitlab is available at https://127.0.0.1/
 
-CI is integrated into Gitlab from version 8 onwards. 
+CI is integrated into Gitlab from version 8 onwards.
 
 
 Releases
@@ -49,4 +91,3 @@ From 8 onwards, CI is part of Gitlab. You need to comment out following lines in
 # ci_external_url 'http://gitlabci.invalid/'
 # nginx['redirect_http_to_https'] = false
 ```
-
