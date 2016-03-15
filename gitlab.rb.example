@@ -1,12 +1,12 @@
 # Change the external_url to the address your users will type in their browser
 # if http
-# external_url 'http://gitlab.invalid/'
+external_url 'http://gitlab.invalid/'
 
 # if https
-external_url 'https://gitlab.invalid/'
-nginx['redirect_http_to_https'] = true
-nginx['ssl_certificate'] = "/etc/ssl/certs/ssl-cert-snakeoil.pem"
-nginx['ssl_certificate_key'] = "/etc/ssl/private/ssl-cert-snakeoil.key"
+# external_url 'https://gitlab.invalid/'
+# nginx['redirect_http_to_https'] = true
+# nginx['ssl_certificate'] = "/etc/ssl/certs/ssl-cert-snakeoil.pem"
+# nginx['ssl_certificate_key'] = "/etc/ssl/private/ssl-cert-snakeoil.key"
 
 #
 # These settings are documented in more detail at
@@ -24,7 +24,7 @@ gitlab_rails['ldap_servers'] = YAML.load <<-EOS
     active_directory: false
     allow_username_or_email_login: false
     base: 'bind.base.here'
-    user_filter: 
+    user_filter:
     attributes:
         username: [ 'sAMAccountName' ]
         email: [ 'mail', 'userPrincipalName' ]
