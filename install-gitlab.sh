@@ -89,6 +89,11 @@ apt-get install -y $GITLAB_FLAVOR
 cp /vagrant/gitlab.rb /etc/gitlab/gitlab.rb
 gitlab-ctl reconfigure
 
+# Install docker
+curl -sSL https://get.docker.com/ | sh
+
+
+
 # done
 echo "Done!"
 echo " Login at your host:port with 'root' + '5iveL!fe'"
