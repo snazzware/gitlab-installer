@@ -21,6 +21,7 @@ To set up a runner, you'll need to first set up a project in gitlab. Then, go to
 ```
 # docker run --add-host gitlab.local:192.168.201.100 -e CI_SERVER_URL=http://gitlab.local/ci -e REGISTRATION_TOKEN=CI_TOKEN_GOES_HERE -e GITLAB_SERVER_FQDN=gitlab.local bobey/docker-gitlab-ci-runner-php5.6
 ```
+4. It'll take a little bit for docker to download and spin up, depending on your connection and system.
 
 Once running, whenever you commit code to the project, a build will automatically kick off and run any tests defined in the .gitlab-ci.yml file of your project.
 
@@ -37,6 +38,7 @@ phpunit:
     - vendor/bin/phpunit --coverage-text tests
 ```
 
+I have a simple project set up w/ phpunit tests and gitlab-ci.yml file at https://github.com/snazzware/gitlab-ci-test
 
 Original README.md below
 ========================
