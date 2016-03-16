@@ -4,6 +4,7 @@ gitlab-installer
 I've tweaked this from the original upstream to use http by default (to avoid self-signed cert issues w/ CI runner), and to use a private network IP rather than a port number on localhost. This version also installs Docker.
 
 1. Install Vagrant & VirtualBox if you don't already have them
+2. Install the vagrant-hostmanager plugin `vagrant install vagrant-hostmanager`
 2. Run "vagrant up" from command line in directory you cloned this repo to
 3. Have some coffee
 4. Vagrant will ask want you to enter your password so that it can edit your /etc/hosts file. If you don't want to enter it, you can manually add "192.168.201.100 gitlab.local".
